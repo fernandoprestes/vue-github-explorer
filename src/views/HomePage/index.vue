@@ -16,5 +16,5 @@
 </script>
 
 <template>
-  <main class="container mx-auto flex h-screen w-full items-center justify-center"></main>
+  <div></div>
 </template>
