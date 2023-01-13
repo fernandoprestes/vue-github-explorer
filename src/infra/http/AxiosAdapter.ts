@@ -13,7 +13,7 @@ export default class AxiosAdapter implements HttpClient {
       const config = {
         ...httpConfig,
       };
-      const response = await axios(`https://dummyjson.com/${url}`, config);
+      const response = await axios(`https://api.github.com/${url}`, config);
       return response.data;
     } catch (error: any) {
       return error.response;

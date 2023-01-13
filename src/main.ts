@@ -1,18 +1,18 @@
 import { createApp } from 'vue';
 import App from './App.vue';
-import '@unocss/reset/tailwind.css';
-import 'uno.css';
 import router from './router';
 import AxiosAdapter from './infra/http/AxiosAdapter';
+import '@unocss/reset/tailwind.css';
+import 'uno.css';
 
-import UsersGatewayHttp from './infra/gateway/UsersGatewayHttp';
+import UserGatewayHttp from './infra/gateway/UserGatewayHttp';
 
 const app = createApp(App);
 
 const httpClient = new AxiosAdapter();
-const usersGateway = new UsersGatewayHttp(httpClient);
+const userGateway = new UserGatewayHttp(httpClient);
 
-app.provide('usersGateway', usersGateway);
+app.provide('userGateway', userGateway);
 
 app.use(router);
 

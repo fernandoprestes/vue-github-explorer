@@ -8,6 +8,10 @@ const routes: RouteRecordRaw[] = [
     name: 'HomePage',
     component: HomePage,
   },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: { name: 'Home' },
+  },
 ];
 
 const router = createRouter({
