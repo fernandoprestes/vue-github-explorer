@@ -1,18 +1,18 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
 
-import HomePage from '~/views/HomePage/index.vue';
-import FavoritesPage from '~/views/FavoritesPage/index.vue';
+import Home from '~/views/Home/index.vue';
+import Favorites from '~/views/Favorites/index.vue';
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    name: 'HomePage',
-    component: HomePage,
+    name: 'Home',
+    component: Home,
   },
   {
     path: '/favorites',
-    name: 'FavoritesPage',
-    component: FavoritesPage,
+    name: 'Favorites',
+    component: Favorites,
   },
   {
     path: '/:pathMatch(.*)*',
