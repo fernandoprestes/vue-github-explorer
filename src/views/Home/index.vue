@@ -1,20 +1,25 @@
 <script lang="ts" setup>
-  import { inject, onMounted, reactive } from 'vue';
-  import type UserGateway from '~/infra/gateway/UserGateway';
+  import { data } from './useData';
 
-  const userGateway = inject('userGateway') as UserGateway;
+  import { computed } from 'vue';
 
-  const data = reactive({
-    isLoading: true,
-    user: {} as any,
-  });
+  import SearchWrapper from './components/SearchWrapper.vue';
+  import ListUsers from './components/ListUsers.vue';
+  import ListRepos from './components/ListRepos.vue';
 
-  onMounted(async () => {
-    data.user = await userGateway.getGithubUser('fernandoprestes');
-    data.isLoading = false;
+  const componentsInstance: any = {
+    SearchWrapper,
+    ListUsers,
+    ListRepos,
+  };
+
+  const componentRender = computed(() => {
+    if (data.user.length && data.optionSelected === 'SearchInputUser') return 'ListUsers';
+    if (data.repos.length && data.optionSelected === 'SearchInputRepos') return 'ListRepos';
+    return 'SearchWrapper';
   });
 </script>
 
 <template>
-  <div></div>
+  <component :is="componentsInstance[componentRender]" />
 </template>
