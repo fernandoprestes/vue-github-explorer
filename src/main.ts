@@ -4,6 +4,7 @@ import router from './router';
 import AxiosAdapter from './infra/http/AxiosAdapter';
 import '@unocss/reset/tailwind.css';
 import 'uno.css';
+import 'animate.css';
 
 import UserGatewayHttp from './infra/gateway/UserGatewayHttp';
 

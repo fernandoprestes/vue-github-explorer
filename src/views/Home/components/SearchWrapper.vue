@@ -12,7 +12,7 @@
 </script>
 
 <template>
-  <div class="mt-10 flex flex-col items-center">
+  <div class="flex flex-col items-center pt-10">
     <SearchTypeoptions />
     <component :is="inputsInstance[data.optionSelected]" />
   </div>

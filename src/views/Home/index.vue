@@ -21,5 +21,12 @@
 </script>
 
 <template>
-  <component :is="componentsInstance[componentRender]" />
+  <Transition
+    enter-active-class="animate__animated animate__fadeInDown"
+    leave-active-class="animate__animated animate__fadeOutDown"
+    mode="out-in"
+    appear
+  >
+    <component :is="componentsInstance[componentRender]" />
+  </Transition>
 </template>

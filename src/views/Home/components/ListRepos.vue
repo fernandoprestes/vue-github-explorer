@@ -13,7 +13,7 @@
 </script>
 
 <template>
-  <div class="mt-10">
+  <div class="pt-10">
     <button @click="handleBackPage">Voltar</button>
     <div class="flex flex-col gap-4">
       <div

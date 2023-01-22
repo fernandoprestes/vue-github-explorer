@@ -19,3 +19,20 @@ export interface Users {
   site_admin: boolean;
   score: number;
 }
+
+export interface User extends Users {
+  name?: null;
+  company?: null;
+  blog: string;
+  location?: null;
+  email?: null;
+  hireable: boolean;
+  bio?: null;
+  twitter_username?: null;
+  public_repos: number;
+  public_gists: number;
+  followers: number;
+  following: number;
+  created_at: string;
+  updated_at: string;
+}

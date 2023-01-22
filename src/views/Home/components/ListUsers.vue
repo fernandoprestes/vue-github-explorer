@@ -2,6 +2,10 @@
   import { ref } from 'vue';
   import { data, handleSearchGithubUser } from '../useData';
 
+  import useDialog from '~/composables/useDialog';
+
+  const dialog = useDialog();
+
   const perPage = ref(5);
   const handleClickButtonMoreSearch = () => {
     perPage.value += 5;
@@ -10,29 +14,41 @@
   const handleBackPage = () => {
     data.user = [];
   };
+
+  const handleSelectedSingleUser = async (username: string) => {
+    dialog.open({ component: 'DialogUserDetails', props: { username: username } });
+  };
 </script>
 
 <template>
-  <div class="mt-10">
+  <div class="pt-10">
     <button @click="handleBackPage">Voltar</button>
     <div class="flex flex-col gap-4">
-      <div
-        v-for="user in data.user"
-        :key="user.id"
-        class="border-gray-3 pa-2 flex items-start gap-2 rounded border"
+      <TransitionGroup
+        enter-active-class="animate__animated animate__fadeInDown"
+        leave-active-class="animate__animated animate__fadeOutDown"
+        mode="out-in"
+        appear
       >
-        <img
-          :src="user.avatar_url"
-          :alt="`avatar github user ${user.login}`"
-          class="h-20 w-20 rounded-full"
-        />
-        <a
-          :href="`https://github.com/${user.login}`"
-          target="_blank"
+        <div
+          v-for="user in data.user"
+          :key="user.id"
+          class="border-gray-3 pa-2 flex items-start gap-2 rounded border"
         >
-          <h2 class="text-xl font-bold">{{ user.login }}</h2>
-        </a>
-      </div>
+          <img
+            :src="user.avatar_url"
+            :alt="`avatar github user ${user.login}`"
+            class="h-20 w-20 rounded-full"
+          />
+          <h2
+            class="text-xl font-bold"
+            @click="handleSelectedSingleUser(user.login)"
+          >
+            {{ user.login }}
+          </h2>
+        </div>
+      </TransitionGroup>
+
       <button @click="handleClickButtonMoreSearch">Buscar mais</button>
     </div>
   </div>
