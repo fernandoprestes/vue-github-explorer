@@ -22,8 +22,10 @@
 
 <template>
   <div class="pt-10">
-    <button @click="handleBackPage">Voltar</button>
-    <div class="flex flex-col gap-4">
+    <button @click="handleBackPage">
+      <div class="i-ph-arrow-left-bold h-6 w-6" />
+    </button>
+    <div class="flex flex-col gap-4 pb-8">
       <TransitionGroup
         enter-active-class="animate__animated animate__fadeInDown"
         leave-active-class="animate__animated animate__fadeOutDown"
@@ -48,8 +50,12 @@
           </h2>
         </div>
       </TransitionGroup>
-
-      <button @click="handleClickButtonMoreSearch">Buscar mais</button>
+      <button
+        class="border-gray-3 rounded border px-2 py-4"
+        @click="handleClickButtonMoreSearch"
+      >
+        Buscar mais
+      </button>
     </div>
   </div>
 </template>

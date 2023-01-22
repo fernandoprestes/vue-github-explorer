@@ -8,8 +8,8 @@ export default class UserGatewayHttp implements UserGateway {
     const userResponse = await this.httpClient.get(`users/${username}`);
     return userResponse;
   }
-  async getGithubUserRepos(username: string): Promise<any> {
-    const userReposResponse = await this.httpClient.get(`users/${username}/repos`);
+  async getGithubUserRepos(username: string, perPage: number): Promise<any> {
+    const userReposResponse = await this.httpClient.get(`users/${username}/repos?page=1&per_page=${perPage}`);
     return userReposResponse;
   }
   async searchGithubUser(username: string, perPage: number): Promise<any> {
