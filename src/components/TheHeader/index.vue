@@ -1,7 +1,21 @@
+<script lang="ts" setup>
+  import router from '~/router';
+  import { data } from '~/views/Home/useData';
+
+  function handleClickReturnHome() {
+    data.optionSelected = 'SearchInputRepos';
+    data.repos = [];
+    data.user = [];
+    router.push({ name: 'Home' });
+  }
+</script>
 <template>
   <header class="bg-gray-3 py-4">
     <div class="lg:(px-none) container flex justify-between px-4">
-      <div class="flex items-end gap-2">
+      <div
+        class="flex cursor-pointer items-end gap-2"
+        @click="handleClickReturnHome"
+      >
         <h1 class="text-2xl font-bold">Github</h1>
         <i class="text-2xl">Search</i>
       </div>

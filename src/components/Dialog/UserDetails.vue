@@ -1,10 +1,13 @@
 <script setup lang="ts">
   import { computed, inject, onMounted, reactive, ref } from 'vue';
+  import { useReposStore } from '~/store/Repos';
   import type { Repos } from '~/@types/GithubRepos';
   import type { User } from '~/@types/GithubUsers';
   import type UserGateway from '~/infra/gateway/UserGateway';
 
   const userGateway = inject('userGateway') as UserGateway;
+
+  const { toggleFavoriteRepo, hasRepoInFavoritesRepos } = useReposStore();
 
   interface Props {
     objData: { username: string };
@@ -95,11 +98,21 @@
           :key="repo.id"
           class="border-gray-3 flex flex-col flex-wrap border p-2"
         >
-          <h2 class="text-xl font-bold">{{ repo.name }}</h2>
+          <div class="flex justify-between">
+            <h2 class="text-xl font-bold">{{ repo.name }}</h2>
+            <button @click="toggleFavoriteRepo(repo)">
+              <div
+                class="bg-amber h-6 w-6"
+                :class="hasRepoInFavoritesRepos(repo.id) ? 'i-ph-star-fill' : 'i-ph-star'"
+              />
+            </button>
+          </div>
+
           <h3 class="text-sm">{{ repo.full_name }}</h3>
           <p>{{ repo.description }}</p>
         </div>
       </TransitionGroup>
+
       <button
         v-if="!maxUserPublicRepos"
         class="border-gray-3 rounded border px-2 py-4"
