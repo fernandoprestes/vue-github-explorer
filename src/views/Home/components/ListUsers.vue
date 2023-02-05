@@ -43,7 +43,7 @@
             class="h-20 w-20 rounded-full"
           />
           <h2
-            class="text-xl font-bold"
+            class="cursor-pointer text-xl font-bold"
             @click="handleSelectedSingleUser(user.login)"
           >
             {{ user.login }}

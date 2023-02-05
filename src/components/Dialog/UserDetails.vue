@@ -93,8 +93,12 @@
         mode="out-in"
         appear
       >
+        <div v-if="data.repos.length === 0">
+          <p>Esse usuário não possui repositório públicos.</p>
+        </div>
         <div
           v-for="repo in data.repos"
+          v-else
           :key="repo.id"
           class="border-gray-3 flex flex-col flex-wrap border p-2"
         >

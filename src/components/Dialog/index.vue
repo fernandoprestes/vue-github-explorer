@@ -4,10 +4,12 @@
   import 'animate.css';
 
   const DialogUserDetails = defineAsyncComponent(() => import('./UserDetails.vue'));
+  const DialogErrorSearchGitHub = defineAsyncComponent(() => import('./ErrorSearchGitHub.vue'));
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const componentsInstance: any = {
     DialogUserDetails,
+    DialogErrorSearchGitHub,
   };
 
   interface ModalProps {

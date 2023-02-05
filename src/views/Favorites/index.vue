@@ -14,7 +14,13 @@
 
 <template>
   <div class="pt-10">
-    <div class="flex flex-col gap-4 pb-8">
+    <div v-if="!reposList.length">
+      <p>A sua lista de favoritos está vazia.</p>
+    </div>
+    <div
+      v-else
+      class="flex flex-col gap-4 pb-8"
+    >
       <TransitionGroup
         enter-active-class="animate__animated animate__fadeInDown"
         leave-active-class="animate__animated animate__fadeOutDown"

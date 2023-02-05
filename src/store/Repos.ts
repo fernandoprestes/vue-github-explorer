@@ -10,13 +10,12 @@ export const useReposStore = defineStore('repos', {
 
   getters: {
     favoritesReposList: state => state.favoritesRepos,
+    hasRepoInFavoritesRepos(state) {
+      return (id: number) => state.favoritesRepos.some(repo => repo.id === id);
+    },
   },
 
   actions: {
-    hasRepoInFavoritesRepos(id: number) {
-      return this.favoritesRepos.some(repo => repo.id === id);
-    },
-
     toggleFavoriteRepo(repo: Repos) {
       const hasRepo = this.hasRepoInFavoritesRepos(repo.id);
       if (hasRepo) {
