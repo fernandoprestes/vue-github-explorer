@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 
 import Home from '~/views/Home/index.vue';
 import Favorites from '~/views/Favorites/index.vue';
+import NotFound from '~/views/404/index.vue';
 
 const routes: RouteRecordRaw[] = [
   {
@@ -16,7 +17,8 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/:pathMatch(.*)*',
-    redirect: { name: 'Home' },
+    name: 'NotFound',
+    component: NotFound,
   },
 ];
 
