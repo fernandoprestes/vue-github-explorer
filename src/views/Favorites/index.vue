@@ -1,51 +1,34 @@
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { storeToRefs } from 'pinia';
+  import { computed } from 'vue';
   import { useReposStore } from '~/store/Repos';
 
-  const { favoritesReposList, removeFromFavoriteRepo, hasRepoInFavoritesRepos } = useReposStore();
+  import FavoritesEmptyMessage from './components/FavoritesEmptyMessage.vue';
+  import FavoritesList from './components/FavoritesList.vue';
 
-  const reposList = ref(favoritesReposList);
+  const storeRepos = useReposStore();
+  const { isFavoritesReposEmpty } = storeToRefs(storeRepos);
 
-  const handleRemoveFavorite = (repoId: number) => {
-    removeFromFavoriteRepo(repoId);
-    reposList.value = reposList.value.filter(repo => repo.id !== repoId);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const componentsInstance: any = {
+    FavoritesEmptyMessage,
+    FavoritesList,
   };
+
+  const componentRender = computed(() => {
+    return isFavoritesReposEmpty.value ? 'FavoritesEmptyMessage' : 'FavoritesList';
+  });
 </script>
 
 <template>
   <div class="pt-10">
-    <div v-if="!reposList.length">
-      <p>A sua lista de favoritos está vazia.</p>
-    </div>
-    <div
-      v-else
-      class="flex flex-col gap-4 pb-8"
+    <Transition
+      enter-active-class="animate__animated animate__fadeInDown"
+      leave-active-class="animate__animated animate__fadeOutDown"
+      mode="out-in"
+      appear
     >
-      <TransitionGroup
-        enter-active-class="animate__animated animate__fadeInDown"
-        leave-active-class="animate__animated animate__fadeOutDown"
-        mode="out-in"
-        appear
-      >
-        <div
-          v-for="repo in reposList"
-          :key="repo.id"
-          class="border-gray-3 flex flex-col flex-wrap border p-2"
-        >
-          <div class="flex justify-between">
-            <h2 class="text-xl font-bold">{{ repo.name }}</h2>
-            <button @click="handleRemoveFavorite(repo.id)">
-              <div
-                class="bg-amber h-6 w-6"
-                :class="hasRepoInFavoritesRepos(repo.id) ? 'i-ph-star-fill' : 'i-ph-star'"
-              />
-            </button>
-          </div>
-
-          <h3 class="text-sm">{{ repo.full_name }}</h3>
-          <p>{{ repo.description }}</p>
-        </div>
-      </TransitionGroup>
-    </div>
+      <component :is="componentsInstance[componentRender]" />
+    </Transition>
   </div>
 </template>

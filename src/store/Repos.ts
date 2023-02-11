@@ -13,6 +13,7 @@ export const useReposStore = defineStore('repos', {
     hasRepoInFavoritesRepos(state) {
       return (id: number) => state.favoritesRepos.some(repo => repo.id === id);
     },
+    isFavoritesReposEmpty: state => state.favoritesRepos.length === 0,
   },
 
   actions: {
@@ -27,7 +28,6 @@ export const useReposStore = defineStore('repos', {
 
     removeFromFavoriteRepo(repoId: number) {
       this.favoritesRepos = this.favoritesRepos.filter(favRepo => favRepo.id !== repoId);
-      this.favoritesReposList;
     },
   },
 });
